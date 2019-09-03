@@ -22,20 +22,26 @@ class Task extends React.Component {
       <div>
         <input
           type="checkbox"
-          name="test"
+          name="task"
           onChange={this.handleChange}
           checked={this.state.checked}
         />
         <label
-          htmlFor="test"
+          htmlFor="task"
           style={{
             textDecoration: this.state.checked ? "line-through" : "none"
           }}
         >
           {this.props.task}
         </label>
-        <button>Delete</button>
-        <button>Edit</button>
+        <button
+          onClick={event => {
+            this.props.delete(event);
+          }}
+        >
+          Delete
+        </button>
+        <button onClick={this.props.edit}>Edit</button>
       </div>
     );
   }

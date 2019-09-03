@@ -19,7 +19,14 @@ class Day extends React.Component {
     let tasks;
     if (this.props.day) {
       tasks = this.props.day.map((task, i) => {
-        return <Task key={i} task={task} />;
+        return (
+          <Task
+            key={i}
+            task={task}
+            delete={this.props.delete}
+            edit={this.props.edit}
+          />
+        );
       });
     }
     return (
@@ -29,14 +36,6 @@ class Day extends React.Component {
         <button onClick={event => this.props.add(this.state.newTask, event)}>
           Add
         </button>
-        {/* <button
-          onClick={event => {
-            event.target.previousSibling.value = "";
-          }}
-        > 
-          Add
-        </button>
-        */}
       </div>
     );
   }

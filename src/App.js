@@ -12,7 +12,7 @@ class App extends React.Component {
       selectedDay: "",
       sunday: [1, 2, 3],
       monday: [2, 3, 4],
-      tuesday: [3, 4, 5],
+      tuesday: ["a", "b", "c"],
       wednesday: [4],
       thursday: [5],
       friday: [6],
@@ -21,8 +21,8 @@ class App extends React.Component {
 
     this.selectDay = this.selectDay.bind(this);
     this.add = this.add.bind(this);
-    // this.delete = this.delete.bind(this);
-    // this.edit = this.edit.bind(this);
+    this.delete = this.delete.bind(this);
+    this.edit = this.edit.bind(this);
   }
 
   componentDidMount() {
@@ -50,16 +50,25 @@ class App extends React.Component {
   }
 
   add(newTask, event) {
-    event.target.previousSibling.value = "";
-
     this.setState({
       selectedDay: [...this.state.selectedDay, newTask]
     });
+
+    event.target.previousSibling.value = "";
   }
 
-  // delete() {}
+  delete(event) {
+    const array = this.state.selectedDay;
+    const index = array.indexOf(event.target.previousSibling.textContent);
+    if (index !== -1) {
+      array.splice(index, 1);
+      this.setState({ selectedDay: array });
+    }
+  }
 
-  // edit() {}
+  edit() {
+    console.log("edit");
+  }
 
   render() {
     return (
@@ -70,7 +79,12 @@ class App extends React.Component {
             .format("dddd")
             .toUpperCase()}
         </h1>
-        <Day day={this.state.selectedDay} add={this.add} />
+        <Day
+          day={this.state.selectedDay}
+          add={this.add}
+          delete={this.delete}
+          edit={this.edit}
+        />
       </div>
     );
   }
