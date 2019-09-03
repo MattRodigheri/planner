@@ -1,4 +1,5 @@
 import React from "react";
+import Task from "./Task.js";
 
 class Day extends React.Component {
   constructor(props) {
@@ -9,13 +10,8 @@ class Day extends React.Component {
   render() {
     let tasks;
     if (this.props.day) {
-      tasks = this.props.day.map(task => {
-        return (
-          <div>
-            <input type="checkbox" name="test" />
-            <label for="test">{task}</label>
-          </div>
-        );
+      tasks = this.props.day.map((task, i) => {
+        return <Task key={i} task={task} />;
       });
     }
     return <div>{tasks}</div>;
