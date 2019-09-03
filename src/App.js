@@ -3,7 +3,6 @@ import moment from "moment";
 import "./App.css";
 import Header from "./Header.js";
 import Day from "./Day.js";
-import Controls from "./Controls.js";
 
 class App extends React.Component {
   constructor() {
@@ -22,8 +21,8 @@ class App extends React.Component {
 
     this.selectDay = this.selectDay.bind(this);
     this.add = this.add.bind(this);
-    this.delete = this.delete.bind(this);
-    this.edit = this.edit.bind(this);
+    // this.delete = this.delete.bind(this);
+    // this.edit = this.edit.bind(this);
   }
 
   componentDidMount() {
@@ -50,11 +49,17 @@ class App extends React.Component {
     }
   }
 
-  add() {}
+  add(newTask, event) {
+    event.target.previousSibling.value = "";
 
-  delete() {}
+    this.setState({
+      selectedDay: [...this.state.selectedDay, newTask]
+    });
+  }
 
-  edit() {}
+  // delete() {}
+
+  // edit() {}
 
   render() {
     return (
@@ -65,8 +70,7 @@ class App extends React.Component {
             .format("dddd")
             .toUpperCase()}
         </h1>
-        <Controls add={this.add} delete={this.delete} edit={this.edit} />
-        <Day day={this.state.selectedDay} />
+        <Day day={this.state.selectedDay} add={this.add} />
       </div>
     );
   }

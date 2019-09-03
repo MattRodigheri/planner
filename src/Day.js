@@ -5,6 +5,14 @@ class Day extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
+
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(event) {
+    this.setState({
+      newTask: event.target.value
+    });
   }
 
   render() {
@@ -14,7 +22,23 @@ class Day extends React.Component {
         return <Task key={i} task={task} />;
       });
     }
-    return <div>{tasks}</div>;
+    return (
+      <div>
+        {tasks}
+        <input type="text" onChange={event => this.handleChange(event)} />
+        <button onClick={event => this.props.add(this.state.newTask, event)}>
+          Add
+        </button>
+        {/* <button
+          onClick={event => {
+            event.target.previousSibling.value = "";
+          }}
+        > 
+          Add
+        </button>
+        */}
+      </div>
+    );
   }
 }
 

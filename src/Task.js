@@ -34,6 +34,8 @@ class Task extends React.Component {
         >
           {this.props.task}
         </label>
+        <button>Delete</button>
+        <button>Edit</button>
       </div>
     );
   }
