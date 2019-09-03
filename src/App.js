@@ -3,6 +3,7 @@ import moment from "moment";
 import "./App.css";
 import Header from "./Header.js";
 import Day from "./Day.js";
+import Controls from "./Controls.js";
 
 class App extends React.Component {
   constructor() {
@@ -10,9 +11,9 @@ class App extends React.Component {
 
     this.state = {
       selectedDay: "",
-      sunday: [1],
-      monday: [2],
-      tuesday: [3],
+      sunday: [1, 2, 3],
+      monday: [2, 3, 4],
+      tuesday: [3, 4, 5],
       wednesday: [4],
       thursday: [5],
       friday: [6],
@@ -20,6 +21,9 @@ class App extends React.Component {
     };
 
     this.selectDay = this.selectDay.bind(this);
+    this.add = this.add.bind(this);
+    this.delete = this.delete.bind(this);
+    this.edit = this.edit.bind(this);
   }
 
   componentDidMount() {
@@ -46,6 +50,12 @@ class App extends React.Component {
     }
   }
 
+  add() {}
+
+  delete() {}
+
+  edit() {}
+
   render() {
     return (
       <div>
@@ -55,6 +65,7 @@ class App extends React.Component {
             .format("dddd")
             .toUpperCase()}
         </h1>
+        <Controls add={this.add} delete={this.delete} edit={this.edit} />
         <Day day={this.state.selectedDay} />
       </div>
     );

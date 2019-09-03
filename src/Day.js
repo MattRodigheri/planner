@@ -7,13 +7,18 @@ class Day extends React.Component {
   }
 
   render() {
-    console.log(this.props.day);
-    return (
-      <div>
-        {/* <h1>{this.props.day.toUpperCase()}</h1> */}
-        <p>{this.props.day[0]}</p>
-      </div>
-    );
+    let tasks;
+    if (this.props.day) {
+      tasks = this.props.day.map(task => {
+        return (
+          <div>
+            <input type="checkbox" name="test" />
+            <label for="test">{task}</label>
+          </div>
+        );
+      });
+    }
+    return <div>{tasks}</div>;
   }
 }
 
