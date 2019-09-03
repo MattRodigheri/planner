@@ -1,26 +1,64 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import moment from "moment";
+import "./App.css";
+import Header from "./Header.js";
+import Day from "./Day.js";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  constructor() {
+    super();
+
+    this.state = {
+      selectedDay: "",
+      sunday: [1],
+      monday: [2],
+      tuesday: [3],
+      wednesday: [4],
+      thursday: [5],
+      friday: [6],
+      saturday: [7]
+    };
+
+    this.selectDay = this.selectDay.bind(this);
+  }
+
+  componentDidMount() {
+    for (const day in this.state) {
+      if (
+        moment()
+          .format("dddd")
+          .toLowerCase() === day.toString()
+      ) {
+        this.setState({
+          selectedDay: this.state[day]
+        });
+      }
+    }
+  }
+
+  selectDay(dayClicked) {
+    for (const day in this.state) {
+      if (dayClicked === day) {
+        this.setState({
+          selectedDay: this.state[day]
+        });
+      }
+    }
+  }
+
+  render() {
+    return (
+      <div>
+        <Header selectDay={this.selectDay} />
+        <h1>
+          {moment()
+            .format("dddd")
+            .toUpperCase()}
+        </h1>
+        <Day day={this.state.selectedDay} />
+      </div>
+    );
+  }
 }
 
 export default App;
