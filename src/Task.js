@@ -18,6 +18,17 @@ class Task extends React.Component {
   }
 
   render() {
+    let editInput;
+    if (this.props.editIndex === this.props.taskIndex) {
+      editInput = (
+        <div>
+          <input type="text" defaultValue={this.props.editValue} />
+          <button onClick={event => this.props.confirmEdit(event)}>
+            Confirm
+          </button>
+        </div>
+      );
+    }
     return (
       <div>
         <input
@@ -42,6 +53,7 @@ class Task extends React.Component {
           Delete
         </button>
         <button onClick={this.props.edit}>Edit</button>
+        {editInput}
       </div>
     );
   }

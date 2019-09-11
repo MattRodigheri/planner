@@ -10,22 +10,24 @@ class App extends React.Component {
 
     this.state = {
       selectedDay: "",
-      sunday: [1, 2, 3],
-      monday: [2, 3, 4],
+      sunday: ["a", "b", "c"],
+      monday: ["a", "b", "c"],
       tuesday: ["a", "b", "c"],
-      wednesday: [4],
-      thursday: [5],
-      friday: [6],
-      saturday: [7]
+      wednesday: ["a", "b", "c"],
+      thursday: ["a", "b", "c"],
+      friday: ["a", "b", "c"],
+      saturday: ["a", "b", "c"]
     };
 
     this.selectDay = this.selectDay.bind(this);
     this.add = this.add.bind(this);
     this.delete = this.delete.bind(this);
     this.edit = this.edit.bind(this);
+    this.confirmEdit = this.confirmEdit.bind(this);
   }
 
   componentDidMount() {
+    // eslint-disable-next-line
     for (const day in this.state) {
       if (
         moment()
@@ -38,8 +40,8 @@ class App extends React.Component {
       }
     }
   }
-
   selectDay(dayClicked) {
+    // eslint-disable-next-line
     for (const day in this.state) {
       if (dayClicked === day) {
         this.setState({
@@ -66,8 +68,25 @@ class App extends React.Component {
     }
   }
 
-  edit() {
-    console.log("edit");
+  edit(event) {
+    const array = this.state.selectedDay;
+    const index = array.indexOf(
+      event.target.previousSibling.previousSibling.textContent
+    );
+    this.setState({
+      editIndex: index,
+      editValue: event.target.previousSibling.previousSibling.textContent
+    });
+  }
+
+  confirmEdit(event) {
+    const array = this.state.selectedDay;
+    const index = array.indexOf(this.state.editValue);
+    array.splice(index, 1, event.target.previousSibling.value);
+    this.setState({
+      selectedDay: array,
+      editIndex: -1
+    });
   }
 
   render() {
@@ -84,6 +103,9 @@ class App extends React.Component {
           add={this.add}
           delete={this.delete}
           edit={this.edit}
+          editIndex={this.state.editIndex}
+          editValue={this.state.editValue}
+          confirmEdit={this.confirmEdit}
         />
       </div>
     );

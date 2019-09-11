@@ -22,9 +22,13 @@ class Day extends React.Component {
         return (
           <Task
             key={i}
+            taskIndex={i}
             task={task}
             delete={this.props.delete}
             edit={this.props.edit}
+            editIndex={this.props.editIndex}
+            editValue={this.props.editValue}
+            confirmEdit={this.props.confirmEdit}
           />
         );
       });
