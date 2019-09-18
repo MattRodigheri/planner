@@ -1,0 +1,13 @@
+.task {
+  margin-right: 1em;
+}
+
+.buttons {
+  border: none;
+  cursor: pointer;
+  /* margin-left: 1em; */
+}
+
+.buttons:hover {
+  opacity: 0.5;
+}

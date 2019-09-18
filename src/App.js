@@ -63,13 +63,11 @@ class App extends React.Component {
     this.setState({
       selectedDay: [...this.state.selectedDay, newTask]
     });
-
-    event.target.previousSibling.value = "";
   }
 
-  delete(event) {
+  delete(task) {
     const array = this.state.selectedDay;
-    const index = array.indexOf(event.target.previousSibling.textContent);
+    const index = array.indexOf(task);
     if (index !== -1) {
       array.splice(index, 1);
       this.setState({ selectedDay: array });
@@ -88,7 +86,7 @@ class App extends React.Component {
   confirmEdit(event) {
     const array = this.state.selectedDay;
     const index = array.indexOf(this.state.editValue);
-    array.splice(index, 1, event.target.previousSibling.value);
+    array.splice(index, 1, event);
     this.setState({
       selectedDay: array,
       editIndex: -1

@@ -1,6 +1,9 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCalendarPlus } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCalendarPlus,
+  faCalendarCheck
+} from "@fortawesome/free-solid-svg-icons";
 
 class AddToDays extends React.Component {
   constructor() {
@@ -88,15 +91,15 @@ class AddToDays extends React.Component {
             onChange={event => this.handleChange(event)}
           />
           Saturday
-          <button onClick={this.confirmDaysAdded}>
-            Add Task to These Days
+          <button className="buttons" onClick={this.confirmDaysAdded}>
+            <FontAwesomeIcon icon={faCalendarCheck} />
           </button>
         </div>
       );
     }
     return (
       <span>
-        <button onClick={this.showDayOptions}>
+        <button className="buttons" onClick={this.showDayOptions}>
           <FontAwesomeIcon icon={faCalendarPlus} />
         </button>
         {dayOptions}

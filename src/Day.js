@@ -1,5 +1,8 @@
 import React from "react";
+import ReactDOM from "react-dom";
 import Task from "./Task.js";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 class Day extends React.Component {
   constructor(props) {
@@ -7,11 +10,23 @@ class Day extends React.Component {
     this.state = {};
 
     this.handleChange = this.handleChange.bind(this);
+    this.confirmAddition = this.confirmAddition.bind(this);
   }
 
   handleChange(event) {
     this.setState({
       newTask: event.target.value
+    });
+  }
+
+  confirmAddition() {
+    this.props.add(this.state.newTask);
+
+    const node = ReactDOM.findDOMNode(this);
+    node.querySelector(".input").value = "";
+
+    this.setState({
+      newTask: ""
     });
   }
 
@@ -38,9 +53,13 @@ class Day extends React.Component {
       <div>
         <h1>{this.props.dayName}</h1>
         {tasks}
-        <input type="text" onChange={event => this.handleChange(event)} />
-        <button onClick={event => this.props.add(this.state.newTask, event)}>
-          Add
+        <input
+          type="text"
+          className="input"
+          onChange={event => this.handleChange(event)}
+        />
+        <button className="buttons" onClick={this.confirmAddition}>
+          <FontAwesomeIcon icon={faPlus} />
         </button>
       </div>
     );

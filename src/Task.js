@@ -1,7 +1,11 @@
 import React from "react";
 import AddToDays from "./AddToDays.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrashAlt, faEdit } from "@fortawesome/free-solid-svg-icons";
+import {
+  faTrashAlt,
+  faEdit,
+  faCheckSquare
+} from "@fortawesome/free-solid-svg-icons";
 
 class Task extends React.Component {
   constructor(props) {
@@ -11,10 +15,16 @@ class Task extends React.Component {
       checked: false
     };
 
-    this.handleChange = this.handleChange.bind(this);
+    this.handleCheck = this.handleCheck.bind(this);
   }
 
   handleChange(event) {
+    this.setState({
+      newEntry: event.target.value
+    });
+  }
+
+  handleCheck(event) {
     this.setState({
       checked: event.target.checked
     });
@@ -25,10 +35,17 @@ class Task extends React.Component {
     if (this.props.editIndex === this.props.taskIndex) {
       editInput = (
         <div>
-          <input type="text" defaultValue={this.props.editValue} />
+          <input
+            type="text"
+            defaultValue={this.props.editValue}
+            onChange={event => this.handleChange(event)}
+          />
 
-          <button onClick={event => this.props.confirmEdit(event)}>
-            Confirm
+          <button
+            className="buttons"
+            onClick={() => this.props.confirmEdit(this.state.newEntry)}
+          >
+            <FontAwesomeIcon icon={faCheckSquare} />
           </button>
         </div>
       );
@@ -38,10 +55,11 @@ class Task extends React.Component {
         <input
           type="checkbox"
           name="task"
-          onChange={this.handleChange}
+          onChange={this.handleCheck}
           checked={this.state.checked}
         />
         <label
+          className="task"
           htmlFor="task"
           style={{
             //TODO: fix line-through on all day's tasks at that index
@@ -51,13 +69,17 @@ class Task extends React.Component {
           {this.props.task}
         </label>
         <button
-          onClick={event => {
-            this.props.delete(event);
+          className="buttons"
+          onClick={() => {
+            this.props.delete(this.props.task);
           }}
         >
           <FontAwesomeIcon icon={faTrashAlt} />
         </button>
-        <button onClick={() => this.props.edit(this.props.task)}>
+        <button
+          className="buttons"
+          onClick={() => this.props.edit(this.props.task)}
+        >
           <FontAwesomeIcon icon={faEdit} />
         </button>
         {editInput}
