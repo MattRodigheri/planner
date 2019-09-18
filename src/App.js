@@ -9,14 +9,15 @@ class App extends React.Component {
     super();
 
     this.state = {
+      dayName: moment().format("dddd"),
       selectedDay: "",
       sunday: ["a", "b", "c"],
-      monday: ["a", "b", "c"],
-      tuesday: ["a", "b", "c"],
-      wednesday: ["a", "b", "c"],
-      thursday: ["a", "b", "c"],
-      friday: ["a", "b", "c"],
-      saturday: ["a", "b", "c"]
+      monday: ["d", "e", "f"],
+      tuesday: ["h", "i", "j"],
+      wednesday: ["k", "l", "m"],
+      thursday: ["n", "o", "p"],
+      friday: ["q", "r", "s"],
+      saturday: ["t", "u", "v"]
     };
 
     this.selectDay = this.selectDay.bind(this);
@@ -24,6 +25,7 @@ class App extends React.Component {
     this.delete = this.delete.bind(this);
     this.edit = this.edit.bind(this);
     this.confirmEdit = this.confirmEdit.bind(this);
+    this.addToDays = this.addToDays.bind(this);
   }
 
   componentDidMount() {
@@ -32,7 +34,7 @@ class App extends React.Component {
       if (
         moment()
           .format("dddd")
-          .toLowerCase() === day.toString()
+          .toLowerCase() === day
       ) {
         this.setState({
           selectedDay: this.state[day]
@@ -40,12 +42,18 @@ class App extends React.Component {
       }
     }
   }
+
   selectDay(dayClicked) {
+    const dayTitle = dayClicked.replace(/\w\S*/g, function(txt) {
+      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+    });
+
     // eslint-disable-next-line
     for (const day in this.state) {
       if (dayClicked === day) {
         this.setState({
-          selectedDay: this.state[day]
+          selectedDay: this.state[day],
+          dayName: dayTitle
         });
       }
     }
@@ -68,14 +76,12 @@ class App extends React.Component {
     }
   }
 
-  edit(event) {
+  edit(task) {
     const array = this.state.selectedDay;
-    const index = array.indexOf(
-      event.target.previousSibling.previousSibling.textContent
-    );
+    const index = array.indexOf(task);
     this.setState({
       editIndex: index,
-      editValue: event.target.previousSibling.previousSibling.textContent
+      editValue: task
     });
   }
 
@@ -89,16 +95,26 @@ class App extends React.Component {
     });
   }
 
+  addToDays(task, days) {
+    // eslint-disable-next-line
+    for (const dayToAddTo in this.state) {
+      if (days.includes(dayToAddTo)) {
+        const arr = this.state[dayToAddTo];
+        arr.push(task);
+        this.setState({
+          [dayToAddTo]: arr
+        });
+      }
+    }
+  }
+
   render() {
     return (
       <div>
         <Header selectDay={this.selectDay} />
-        <h1>
-          {moment()
-            .format("dddd")
-            .toUpperCase()}
-        </h1>
+
         <Day
+          dayName={this.state.dayName}
           day={this.state.selectedDay}
           add={this.add}
           delete={this.delete}
@@ -106,6 +122,7 @@ class App extends React.Component {
           editIndex={this.state.editIndex}
           editValue={this.state.editValue}
           confirmEdit={this.confirmEdit}
+          addToDays={this.addToDays}
         />
       </div>
     );

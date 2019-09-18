@@ -1,4 +1,7 @@
 import React from "react";
+import AddToDays from "./AddToDays.js";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrashAlt, faEdit } from "@fortawesome/free-solid-svg-icons";
 
 class Task extends React.Component {
   constructor(props) {
@@ -23,6 +26,7 @@ class Task extends React.Component {
       editInput = (
         <div>
           <input type="text" defaultValue={this.props.editValue} />
+
           <button onClick={event => this.props.confirmEdit(event)}>
             Confirm
           </button>
@@ -40,6 +44,7 @@ class Task extends React.Component {
         <label
           htmlFor="task"
           style={{
+            //TODO: fix line-through on all day's tasks at that index
             textDecoration: this.state.checked ? "line-through" : "none"
           }}
         >
@@ -50,10 +55,14 @@ class Task extends React.Component {
             this.props.delete(event);
           }}
         >
-          Delete
+          <FontAwesomeIcon icon={faTrashAlt} />
         </button>
-        <button onClick={this.props.edit}>Edit</button>
+        <button onClick={() => this.props.edit(this.props.task)}>
+          <FontAwesomeIcon icon={faEdit} />
+        </button>
         {editInput}
+
+        <AddToDays addToDays={this.props.addToDays} task={this.props.task} />
       </div>
     );
   }

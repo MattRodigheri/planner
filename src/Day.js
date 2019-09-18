@@ -29,12 +29,14 @@ class Day extends React.Component {
             editIndex={this.props.editIndex}
             editValue={this.props.editValue}
             confirmEdit={this.props.confirmEdit}
+            addToDays={this.props.addToDays}
           />
         );
       });
     }
     return (
       <div>
+        <h1>{this.props.dayName}</h1>
         {tasks}
         <input type="text" onChange={event => this.handleChange(event)} />
         <button onClick={event => this.props.add(this.state.newTask, event)}>
