@@ -59,7 +59,6 @@ class Task extends React.Component {
           checked={this.state.checked}
         />
         <label
-          className="task"
           htmlFor="task"
           style={{
             //TODO: fix line-through on all day's tasks at that index

@@ -50,7 +50,7 @@ class Day extends React.Component {
       });
     }
     return (
-      <div>
+      <div className="day">
         <h1>{this.props.dayName}</h1>
         {tasks}
         <input

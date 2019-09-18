@@ -59,7 +59,7 @@ class App extends React.Component {
     }
   }
 
-  add(newTask, event) {
+  add(newTask) {
     this.setState({
       selectedDay: [...this.state.selectedDay, newTask]
     });
@@ -108,7 +108,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="app">
         <Header selectDay={this.selectDay} />
 
         <Day

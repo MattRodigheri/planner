@@ -2,7 +2,7 @@ import React from "react";
 
 function Header(props) {
   return (
-    <div>
+    <div className="header">
       <button onClick={() => props.selectDay("sunday")}>Sunday</button>
       <button onClick={() => props.selectDay("monday")}>Monday</button>
       <button onClick={() => props.selectDay("tuesday")}>Tuesday</button>
