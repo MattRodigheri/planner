@@ -49,48 +49,62 @@ class AddToDays extends React.Component {
     if (this.state.selectDaysToAdd) {
       dayOptions = (
         <div>
-          <input
-            type="checkbox"
-            name="sunday"
-            onChange={event => this.handleChange(event)}
-          />
-          Sunday
-          <input
-            type="checkbox"
-            name="monday"
-            onChange={event => this.handleChange(event)}
-          />
-          Monday
-          <input
-            type="checkbox"
-            name="tuesday"
-            onChange={event => this.handleChange(event)}
-          />
-          Tuesday
-          <input
-            type="checkbox"
-            name="wednesday"
-            onChange={event => this.handleChange(event)}
-          />
-          Wednesday
-          <input
-            type="checkbox"
-            name="thursday"
-            onChange={event => this.handleChange(event)}
-          />
-          Thursday
-          <input
-            type="checkbox"
-            name="friday"
-            onChange={event => this.handleChange(event)}
-          />
-          Friday
-          <input
-            type="checkbox"
-            name="saturday"
-            onChange={event => this.handleChange(event)}
-          />
-          Saturday
+          <div className="dayOption">
+            <input
+              type="checkbox"
+              name="sunday"
+              onChange={event => this.handleChange(event)}
+            />
+            <span className="dayLabel">Sunday</span>
+          </div>
+          <div className="dayOption">
+            <input
+              type="checkbox"
+              name="monday"
+              onChange={event => this.handleChange(event)}
+            />
+            <span className="dayLabel">Monday</span>
+          </div>
+          <div className="dayOption">
+            <input
+              type="checkbox"
+              name="tuesday"
+              onChange={event => this.handleChange(event)}
+            />
+            <span className="dayLabel">Tuesday</span>
+          </div>
+          <div className="dayOption">
+            <input
+              type="checkbox"
+              name="wednesday"
+              onChange={event => this.handleChange(event)}
+            />
+            <span className="dayLabel">Wednesday</span>
+          </div>
+          <div className="dayOption">
+            <input
+              type="checkbox"
+              name="thursday"
+              onChange={event => this.handleChange(event)}
+            />
+            <span className="dayLabel">Thursday</span>
+          </div>
+          <div className="dayOption">
+            <input
+              type="checkbox"
+              name="friday"
+              onChange={event => this.handleChange(event)}
+            />
+            <span className="dayLabel">Friday</span>
+          </div>
+          <div className="dayOption">
+            <input
+              type="checkbox"
+              name="saturday"
+              onChange={event => this.handleChange(event)}
+            />
+            <span className="dayLabel">Saturday</span>
+          </div>
           <button className="buttons" onClick={this.confirmDaysAdded}>
             <FontAwesomeIcon icon={faCalendarCheck} />
           </button>

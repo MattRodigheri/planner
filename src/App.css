@@ -68,27 +68,98 @@ button:focus {
 }
 
 .day {
-  background-color: white;
-
+  background: rgba(255, 255, 255, 0.9);
   border-radius: 10px;
-  width: 30%;
-  margin: 0 auto;
+  width: 46%;
+  margin: 40px auto;
 }
+
+@import url("https://fonts.googleapis.com/css?family=Creepster&display=swap");
 
 h1 {
+  font-family: "Creepster", cursive;
+  font-size: 3.5em;
   text-align: center;
-  color: #dd00f3;
+  color: #51ff0d;
+  padding-top: 20px;
 }
 
-.taskLabel {
-  margin-right: 1em;
+@import url("https://fonts.googleapis.com/css?family=Mystery+Quest&display=swap");
+
+label {
+  font-family: "Mystery Quest", cursive;
+  margin: 0 0.5em;
+  font-size: 2em;
+  color: #2b1de8;
 }
 
 .buttons {
   border: none;
   cursor: pointer;
+  background: none;
 }
 
 .buttons:hover {
   opacity: 0.5;
+}
+
+.fa-trash-alt {
+  color: #2b1de8;
+}
+
+.fa-edit {
+  color: #7416ed;
+}
+
+.fa-calendar-plus {
+  color: #dd00f3;
+}
+
+.editInput {
+  margin: 15px 0.5em 15px 1em;
+  font-size: 1.5em;
+  padding-left: 0.5em;
+  color: #7416ed;
+}
+
+.fa-check-square {
+  color: #7416ed;
+  font-size: 1.5em;
+}
+
+.dayOption {
+  margin-left: 2em;
+  margin-top: 0.5em;
+}
+
+@import url("https://fonts.googleapis.com/css?family=Eater&display=swap");
+
+.dayLabel {
+  font-family: "Eater", cursive;
+  margin-left: 0.5em;
+  color: #dd00f3;
+}
+
+.fa-calendar-check {
+  color: #dd00f3;
+  margin-left: 9em;
+  margin-top: 0.5em;
+  margin-bottom: 1em;
+  font-size: 1.5em;
+}
+
+.input {
+  margin: 15px 0.5em 15px 1em;
+  font-size: 1.5em;
+  padding-left: 0.5em;
+}
+
+.input:focus {
+  outline: 0;
+}
+
+.fa-plus {
+  height: 1.5em;
+  font-size: 1.5em;
+  color: #51ff0d;
 }

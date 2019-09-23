@@ -36,6 +36,7 @@ class Task extends React.Component {
       editInput = (
         <div>
           <input
+            className="editInput"
             type="text"
             defaultValue={this.props.editValue}
             onChange={event => this.handleChange(event)}
@@ -81,9 +82,10 @@ class Task extends React.Component {
         >
           <FontAwesomeIcon icon={faEdit} />
         </button>
-        {editInput}
 
         <AddToDays addToDays={this.props.addToDays} task={this.props.task} />
+
+        {editInput}
       </div>
     );
   }
