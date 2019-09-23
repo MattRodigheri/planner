@@ -1,5 +1,6 @@
 import React from "react";
 import moment from "moment";
+import axios from "axios";
 import "./App.css";
 import Header from "./Header.js";
 import Day from "./Day.js";
@@ -29,6 +30,11 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    fetch("http://localhost:3001/api/data")
+      .then(data => data.json())
+      // .then((res) => this.setState({ data: res.data }));
+      .then(res => console.log(res.data));
+
     // eslint-disable-next-line
     for (const day in this.state) {
       if (
@@ -61,6 +67,11 @@ class App extends React.Component {
 
   add(newTask) {
     this.setState({
+      selectedDay: [...this.state.selectedDay, newTask]
+    });
+
+    axios.post("http://localhost:3001/api/data", {
+      // monday: "test"
       selectedDay: [...this.state.selectedDay, newTask]
     });
   }
