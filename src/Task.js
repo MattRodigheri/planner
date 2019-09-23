@@ -4,29 +4,20 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faTrashAlt,
   faEdit,
-  faCheckSquare
+  faCheckSquare,
+  faHotdog
 } from "@fortawesome/free-solid-svg-icons";
 
 class Task extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      checked: false
-    };
-
-    this.handleCheck = this.handleCheck.bind(this);
+    this.state = {};
   }
 
   handleChange(event) {
     this.setState({
       newEntry: event.target.value
-    });
-  }
-
-  handleCheck(event) {
-    this.setState({
-      checked: event.target.checked
     });
   }
 
@@ -53,21 +44,8 @@ class Task extends React.Component {
     }
     return (
       <div>
-        <input
-          type="checkbox"
-          name="task"
-          onChange={this.handleCheck}
-          checked={this.state.checked}
-        />
-        <label
-          htmlFor="task"
-          style={{
-            //TODO: fix line-through on all day's tasks at that index
-            textDecoration: this.state.checked ? "line-through" : "none"
-          }}
-        >
-          {this.props.task}
-        </label>
+        <FontAwesomeIcon icon={faHotdog} />
+        <label htmlFor="task">{this.props.task}</label>
         <button
           className="buttons"
           onClick={() => {

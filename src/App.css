@@ -84,6 +84,11 @@ h1 {
   padding-top: 20px;
 }
 
+.fa-hotdog {
+  color: #1ddde8;
+  margin-left: 2em;
+}
+
 @import url("https://fonts.googleapis.com/css?family=Mystery+Quest&display=swap");
 
 label {
