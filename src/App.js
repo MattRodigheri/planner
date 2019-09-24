@@ -12,13 +12,13 @@ class App extends React.Component {
     this.state = {
       dayName: moment().format("dddd"),
       selectedDay: "",
-      sunday: ["a", "b", "c"],
-      monday: ["d", "e", "f"],
-      tuesday: ["h", "i", "j"],
-      wednesday: ["k", "l", "m"],
-      thursday: ["n", "o", "p"],
-      friday: ["q", "r", "s"],
-      saturday: ["t", "u", "v"]
+      sunday: [],
+      monday: [],
+      tuesday: [],
+      wednesday: [],
+      thursday: [],
+      friday: [],
+      saturday: []
     };
 
     this.selectDay = this.selectDay.bind(this);
@@ -32,8 +32,13 @@ class App extends React.Component {
   componentDidMount() {
     fetch("http://localhost:3001/api/data")
       .then(data => data.json())
-      // .then((res) => this.setState({ data: res.data }));
-      .then(res => console.log(res.data));
+      .then(res => {
+        this.setState({
+          [this.state.dayName.toLowerCase()]: res.data[res.data.length - 1][
+            this.state.dayName.toLowerCase()
+          ]
+        });
+      });
 
     // eslint-disable-next-line
     for (const day in this.state) {
@@ -47,6 +52,25 @@ class App extends React.Component {
         });
       }
     }
+
+    console.log(this.state.tuesday);
+
+    // this.selectDay(this.state.dayName.toLowerCase());
+    // const dayClicked = this.state.dayName.toLowerCase();
+    // const dayTitle = dayClicked.replace(/\w\S*/g, function(txt) {
+    //   return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+    // });
+
+    // // eslint-disable-next-line
+    // for (const day in this.state) {
+    //   if (dayClicked === day) {
+    //     console.log(this.state[day]);
+    //     this.setState({
+    //       selectedDay: this.state[day],
+    //       dayName: dayTitle
+    //     });
+    //   }
+    // }
   }
 
   selectDay(dayClicked) {
@@ -71,8 +95,7 @@ class App extends React.Component {
     });
 
     axios.post("http://localhost:3001/api/data", {
-      // monday: "test"
-      selectedDay: [...this.state.selectedDay, newTask]
+      [this.state.dayName.toLowerCase()]: [...this.state.selectedDay, newTask]
     });
   }
 
