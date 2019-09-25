@@ -11,7 +11,7 @@ class App extends React.Component {
 
     this.state = {
       dayName: moment().format("dddd"),
-      selectedDay: "",
+      selectedDay: [],
       sunday: [],
       monday: [],
       tuesday: [],
@@ -37,30 +37,48 @@ class App extends React.Component {
           .format("dddd")
           .toLowerCase();
         this.setState({
-          selectedDay: res.data[res.data.length - 1][day]
+          // selectedDay: res.data[res.data.length - 1][day]
+          selectedDay: res.data[day]
         });
 
         this.setState({
-          [day]: res.data[res.data.length - 1][day]
+          // [day]: res.data[res.data.length - 1][day]
+          [day]: res.data[day]
         });
       });
   }
 
   selectDay(dayClicked) {
-    this.setState({
-      selectedDay: this.state[dayClicked],
-      dayName: dayClicked
-    });
+    this.setState(
+      {
+        dayName: dayClicked,
+        selectedDay: this.state[dayClicked]
+      },
+      () => console.log(this.state.dayName)
+    );
   }
 
   add(newTask) {
-    this.setState({
-      selectedDay: [...this.state.selectedDay, newTask]
-    });
-
-    axios.post("http://localhost:3001/api/data", {
-      [this.state.dayName.toLowerCase()]: [...this.state.selectedDay, newTask]
-    });
+    this.setState(
+      {
+        selectedDay: [...this.state.selectedDay, newTask],
+        [this.state.dayName.toLowerCase()]: [...this.state.selectedDay, newTask]
+      },
+      () => {
+        axios.post("http://localhost:3001/api/data", {
+          params: {
+            sunday: this.state.sunday,
+            monday: this.state.monday,
+            tuesday: this.state.tuesday,
+            wednesday: this.state.wednesday,
+            thursday: this.state.thursday,
+            friday: this.state.friday,
+            saturday: this.state.saturday,
+            id: "5d894728738b5c797cf5ac8f"
+          }
+        });
+      }
+    );
   }
 
   delete(task) {

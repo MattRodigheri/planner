@@ -39,21 +39,44 @@ app.use(logger("dev"));
 //   });
 // });
 router.get("/data", (req, res) => {
-  Data.find((err, data) => {
+  Data.findById("5d894728738b5c797cf5ac8f", (err, data) => {
     if (err) return res.json({ success: false, error: err });
     return res.json({ success: true, data: data });
   });
 });
 
 router.post("/data", (req, res) => {
-  let data = new Data(req.body);
+  // let data = new Data(req.body);
+  // data.save(err => {
+  //   if (err) return res.json({ success: false, error: err });
+  //   return res.json({ success: true });
+  // });
+  // new Data(data);
 
-  data.save(err => {
-    if (err) return res.json({ success: false, error: err });
-    return res.json({ success: true });
-  });
-
-  new Data(data);
+  Data.findByIdAndUpdate(
+    req.body.params.id,
+    {
+      sunday: req.body.params.sunday,
+      monday: req.body.params.monday,
+      tuesday: req.body.params.tuesday,
+      wednesday: req.body.params.wednesday,
+      thursday: req.body.params.thursday,
+      friday: req.body.params.friday,
+      saturday: req.body.params.saturday
+    },
+    { new: true }
+  )
+    .then(data => {
+      if (data) {
+        console.log(data);
+        return res.json({ success: true });
+      } else {
+        return res.json({ success: false });
+      }
+    })
+    .catch(err => {
+      console.log(err);
+    });
 });
 
 app.use("/api", router);
