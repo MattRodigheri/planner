@@ -33,44 +33,21 @@ class App extends React.Component {
     fetch("http://localhost:3001/api/data")
       .then(data => data.json())
       .then(res => {
-        this.setState({
-          [this.state.dayName.toLowerCase()]: res.data[res.data.length - 1][
-            this.state.dayName.toLowerCase()
-          ]
-        });
+        // eslint-disable-next-line
+        for (const day in res.data[res.data.length - 1]) {
+          // console.log(res.data[res.data.length - 1][day]);
+          if (
+            moment()
+              .format("dddd")
+              .toLowerCase() === day
+          ) {
+            this.setState({
+              selectedDay: res.data[res.data.length - 1][day]
+            });
+            console.log(this.state);
+          }
+        }
       });
-
-    // eslint-disable-next-line
-    for (const day in this.state) {
-      if (
-        moment()
-          .format("dddd")
-          .toLowerCase() === day
-      ) {
-        this.setState({
-          selectedDay: this.state[day]
-        });
-      }
-    }
-
-    console.log(this.state.tuesday);
-
-    // this.selectDay(this.state.dayName.toLowerCase());
-    // const dayClicked = this.state.dayName.toLowerCase();
-    // const dayTitle = dayClicked.replace(/\w\S*/g, function(txt) {
-    //   return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-    // });
-
-    // // eslint-disable-next-line
-    // for (const day in this.state) {
-    //   if (dayClicked === day) {
-    //     console.log(this.state[day]);
-    //     this.setState({
-    //       selectedDay: this.state[day],
-    //       dayName: dayTitle
-    //     });
-    //   }
-    // }
   }
 
   selectDay(dayClicked) {
