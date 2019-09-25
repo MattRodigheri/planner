@@ -23,21 +23,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(logger("dev"));
 
-// router.post("/updateData", (req, res) => {
-//   const { id, update } = req.body;
-//   Data.findByIdAndUpdate(id, update, err => {
-//     if (err) return res.json({ success: false, error: err });
-//     return res.json({ success: true });
-//   });
-// });
-
-// router.delete("/deleteData", (req, res) => {
-//   const { id } = req.body;
-//   Data.findByIdAndRemove(id, err => {
-//     if (err) return res.send(err);
-//     return res.json({ success: true });
-//   });
-// });
 router.get("/data", (req, res) => {
   Data.findById("5d894728738b5c797cf5ac8f", (err, data) => {
     console.log(data);
@@ -47,13 +32,6 @@ router.get("/data", (req, res) => {
 });
 
 router.post("/data", (req, res) => {
-  // let data = new Data(req.body);
-  // data.save(err => {
-  //   if (err) return res.json({ success: false, error: err });
-  //   return res.json({ success: true });
-  // });
-  // new Data(data);
-
   Data.findByIdAndUpdate(
     req.body.params.id,
     {
@@ -69,7 +47,6 @@ router.post("/data", (req, res) => {
   )
     .then(data => {
       if (data) {
-        console.log(data);
         return res.json({ success: true });
       } else {
         return res.json({ success: false });

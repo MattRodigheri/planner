@@ -53,13 +53,10 @@ class App extends React.Component {
   }
 
   selectDay(dayClicked) {
-    this.setState(
-      {
-        dayName: dayClicked,
-        selectedDay: this.state[dayClicked]
-      },
-      () => console.log(this.state.dayName)
-    );
+    this.setState({
+      dayName: dayClicked,
+      selectedDay: this.state[dayClicked]
+    });
   }
 
   add(newTask) {
@@ -90,7 +87,20 @@ class App extends React.Component {
     const index = array.indexOf(task);
     if (index !== -1) {
       array.splice(index, 1);
-      this.setState({ selectedDay: array });
+      this.setState({ selectedDay: array }, () => {
+        axios.post("http://localhost:3001/api/data", {
+          params: {
+            sunday: this.state.sunday,
+            monday: this.state.monday,
+            tuesday: this.state.tuesday,
+            wednesday: this.state.wednesday,
+            thursday: this.state.thursday,
+            friday: this.state.friday,
+            saturday: this.state.saturday,
+            id: "5d894728738b5c797cf5ac8f"
+          }
+        });
+      });
     }
   }
 
