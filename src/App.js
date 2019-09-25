@@ -33,37 +33,24 @@ class App extends React.Component {
     fetch("http://localhost:3001/api/data")
       .then(data => data.json())
       .then(res => {
-        // eslint-disable-next-line
-        for (const day in res.data[res.data.length - 1]) {
-          // console.log(res.data[res.data.length - 1][day]);
-          if (
-            moment()
-              .format("dddd")
-              .toLowerCase() === day
-          ) {
-            this.setState({
-              selectedDay: res.data[res.data.length - 1][day]
-            });
-            console.log(this.state);
-          }
-        }
+        const day = moment()
+          .format("dddd")
+          .toLowerCase();
+        this.setState({
+          selectedDay: res.data[res.data.length - 1][day]
+        });
+
+        this.setState({
+          [day]: res.data[res.data.length - 1][day]
+        });
       });
   }
 
   selectDay(dayClicked) {
-    const dayTitle = dayClicked.replace(/\w\S*/g, function(txt) {
-      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+    this.setState({
+      selectedDay: this.state[dayClicked],
+      dayName: dayClicked
     });
-
-    // eslint-disable-next-line
-    for (const day in this.state) {
-      if (dayClicked === day) {
-        this.setState({
-          selectedDay: this.state[day],
-          dayName: dayTitle
-        });
-      }
-    }
   }
 
   add(newTask) {
