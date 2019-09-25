@@ -10,7 +10,9 @@ class App extends React.Component {
     super();
 
     this.state = {
-      dayName: moment().format("dddd"),
+      dayName: moment()
+        .format("dddd")
+        .toLowerCase(),
       selectedDay: [],
       sunday: [],
       monday: [],
@@ -33,17 +35,19 @@ class App extends React.Component {
     fetch("http://localhost:3001/api/data")
       .then(data => data.json())
       .then(res => {
-        const day = moment()
-          .format("dddd")
-          .toLowerCase();
         this.setState({
-          // selectedDay: res.data[res.data.length - 1][day]
-          selectedDay: res.data[day]
+          sunday: res.data.sunday,
+          monday: res.data.monday,
+          tuesday: res.data.tuesday,
+          wednesday: res.data.wednesday,
+          thursday: res.data.thursday,
+          friday: res.data.friday,
+          saturday: res.data.saturday,
+          selectedDay: res.data[this.state.dayName]
         });
 
         this.setState({
-          // [day]: res.data[res.data.length - 1][day]
-          [day]: res.data[day]
+          [this.state.dayName]: res.data[this.state.dayName]
         });
       });
   }
