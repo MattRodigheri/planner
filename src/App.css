@@ -68,9 +68,9 @@ button:focus {
 }
 
 .day {
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(253, 106, 2, 0.7);
   border-radius: 10px;
-  width: 46%;
+  width: 50%;
   margin: 40px auto;
 }
 
