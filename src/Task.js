@@ -31,6 +31,11 @@ class Task extends React.Component {
             type="text"
             defaultValue={this.props.editValue}
             onChange={event => this.handleChange(event)}
+            onKeyDown={event => {
+              if (event.key === "Enter") {
+                this.props.confirmEdit(this.state.newEntry);
+              }
+            }}
           />
 
           <button

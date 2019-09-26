@@ -19,7 +19,7 @@ class Day extends React.Component {
     });
   }
 
-  confirmAddition() {
+  confirmAddition(event) {
     this.props.add(this.state.newTask);
 
     const node = ReactDOM.findDOMNode(this);
@@ -57,6 +57,11 @@ class Day extends React.Component {
           type="text"
           className="input"
           onChange={event => this.handleChange(event)}
+          onKeyDown={event => {
+            if (event.key === "Enter") {
+              this.confirmAddition();
+            }
+          }}
         />
         <button className="buttons" onClick={this.confirmAddition}>
           <FontAwesomeIcon icon={faPlus} />

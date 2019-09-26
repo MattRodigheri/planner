@@ -25,7 +25,6 @@ app.use(logger("dev"));
 
 router.get("/data", (req, res) => {
   Data.findById("5d894728738b5c797cf5ac8f", (err, data) => {
-    console.log(data);
     if (err) return res.json({ success: false, error: err });
     return res.json({ success: true, data: data });
   });
